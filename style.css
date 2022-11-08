@@ -1,0 +1,34 @@
+img {
+  border-radius: 68px;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+button {
+  padding: 15px 18px;
+  background-color: black;
+  color: #fff;
+  border: none;
+  font-size: medium;
+  border-radius: 20px;
+}
+.male {
+  border-color: steelblue;
+  background-color: steelblue;
+}
+.female {
+  border-color: pink;
+  background-color: pink;
+  color: #333;
+}
