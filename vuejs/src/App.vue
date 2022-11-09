@@ -1,22 +1,78 @@
 
 <template>
   <div class="container">
-   <Header title="Task Tracker"/>
-   <Tasks :tasks="tasks" />
+    <Header title="Task Tracker" @addTaskModal='addTaskModal' :showModal="showModal" />
+    <div v-show="showModal">
+      <AddTask @add-task='addTask' />
+    </div>
+    <Tasks @delete-task="deleteTask" :tasks="tasks" @toggle-reminder="toggleReminder" />
   </div>
 
 </template>
 <script>
 import Header from './components/Header.vue';
 import Tasks from './components/Tasks.vue';
-export default {
-  
-    name: 'App',
-    components: {
-      Header,
-      Tasks
+import AddTask from './components/AddTask.vue';
+export default { 
+
+  name: 'App',
+  components: {
+    Header,
+    Tasks,
+    AddTask
+  },
+  data() {
+    return {
+      tasks: [],
+      showModal: false
+    }
+  },
+  methods: {
+    addTaskModal() {
+      this.showModal = !this.showModal
+    },
+
+    addTask(task) {
+      this.tasks = [...this.tasks, task]
+    },
+
+
+    deleteTask(id) {
+      if (confirm('Are you sure')) {
+        this.tasks = this.tasks.filter((task) => task.id !== id)
+      }
+    },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) => task.id == id ? { ...task, reminder: !task.reminder } : task)
+
+
+    }
+  },
+  created() {
+    {
+      this.tasks = [
+        {
+          "id": "1",
+          "text": "Doctors Appointment",
+          "day": "March 5th at 2:30pm",
+          "reminder": true
+        },
+        {
+          "id": "2",
+          "text": "Meeting with boss",
+          "day": "March 6th at 1:30pm",
+          "reminder": true
+        },
+        {
+          "id": "3",
+          "text": "Food shopping",
+          "day": "March 7th at 2:00pm",
+          "reminder": false
+        }
+      ]
     }
   }
+}
 
 
 

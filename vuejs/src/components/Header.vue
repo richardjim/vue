@@ -1,16 +1,19 @@
 <template>
     <header>
-        <h1>{{title}}</h1>
-        <Button text="Add Task" color="green"/>
+        <h1>{{ title }}</h1>
+        <Button @AddTaskModal="$emit('AddTaskModal')" :text="showModal ? 'Close' : 'Add Task'"
+            :color="showModal ? 'red' : 'green'" />
     </header>
 </template>
-
+  
 <script>
 import Button from './Button.vue';
 export default {
     name: 'Header',
     props: {
-        title: ''
+        title: '',
+        showModal: Boolean
+
     },
     components: {
         Button
